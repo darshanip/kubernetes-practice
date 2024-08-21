@@ -1,8 +1,26 @@
 terraform apply -auto-approve
 
-terraform output -raw ssh_private_key > ~/.ssh/id_rsa_kubespray
+terraform output -raw ssh_private_key > id_rsa_kubespray.pem
+chmod 400 id_rsa_kubespray.pem
 
 git clone https://github.com/kubernetes-sigs/kubespray.git
 
 python3 -m venv kubespray-venv
+
+source kubespray-venv/bin/activate
+
+pip install -U -r requirements.txt 
+
+#if missing
+pip install --upgrade pip
+pip install ruamel.yaml
+
+declare -a IPS=(44.203.117.122 54.161.75.193 18.208.167.194 3.87.186.75)
+
+mkdir -p clusters/sandbox/
+
+CONFIG_FILE=clusters/sandbox/hosts.yaml python3 kubespray/contrib/inventory_builder/inventory.py ${IPS[@]}
+
+cd /kubespray
+ansible-playbook -i ../clusters/sandbox/hosts.yaml -e @../clusters/sandbox/cluster-config.yaml --user=ec2-user --become --become-user=root cluster.yml --private-key=../id_rsa_kubespray.pem
 

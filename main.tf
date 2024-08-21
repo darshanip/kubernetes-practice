@@ -62,7 +62,7 @@ resource "aws_security_group" "kubespray_sg" {
 }
 
 resource "aws_instance" "controlplane" {
-  ami           = "ami-066784287e358dad1"  # Example Ubuntu 20.04 AMI ID (use a free-tier eligible AMI)
+  ami           = "ami-02c21308fed24a8ab"  # Example Ubuntu 20.04 AMI ID (use a free-tier eligible AMI)
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.kubespray_subnet.id
   key_name      = aws_key_pair.kubespray_key.key_name
@@ -79,7 +79,7 @@ resource "aws_instance" "controlplane" {
 
 resource "aws_instance" "worker" {
   count         = 3
-  ami           = "ami-066784287e358dad1"  # Example Ubuntu 20.04 AMI ID (use a free-tier eligible AMI)
+  ami           = "ami-02c21308fed24a8ab"  # Example Ubuntu 20.04 AMI ID (use a free-tier eligible AMI)
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.kubespray_subnet.id
   key_name      = aws_key_pair.kubespray_key.key_name
