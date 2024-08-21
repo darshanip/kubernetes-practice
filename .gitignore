@@ -13,4 +13,4 @@ id_rsa_kubespray
 
 kubespray-venv/*
 id_rsa_kubespray.pem
-kubespray
+kubespray/*
