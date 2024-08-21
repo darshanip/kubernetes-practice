@@ -10,3 +10,5 @@
 
 .terraform.lock.hcl
 id_rsa_kubespray
+
+kubespray-venv/*

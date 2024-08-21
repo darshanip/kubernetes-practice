@@ -1,3 +1,8 @@
 terraform apply -auto-approve
 
 terraform output -raw ssh_private_key > ~/.ssh/id_rsa_kubespray
+
+git clone https://github.com/kubernetes-sigs/kubespray.git
+
+python3 -m venv kubespray-venv
+
