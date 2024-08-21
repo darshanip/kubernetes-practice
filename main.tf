@@ -73,15 +73,6 @@ resource "aws_instance" "controlplane" {
   tags = {
     Name = "controlplane"
   }
-
-  user_data = <<-EOF
-    #!/bin/bash
-    sudo yum update -y
-    sudo yum install -y epel-release
-    sudo yum install -y ansible
-    sudo yum install -y python3-pip
-    sudo pip3 install netaddr
-  EOF
    
   depends_on = [aws_security_group.kubespray_sg] 
 }
@@ -99,15 +90,6 @@ resource "aws_instance" "worker" {
   tags = {
     Name = "worker${count.index + 1}"
   }
-
-  user_data = <<-EOF
-    #!/bin/bash
-    sudo yum update -y
-    sudo yum install -y epel-release
-    sudo yum install -y ansible
-    sudo yum install -y python3-pip
-    sudo pip3 install netaddr
-  EOF
    
   depends_on = [aws_security_group.kubespray_sg] 
   
@@ -125,3 +107,4 @@ output "ssh_private_key" {
   value     = tls_private_key.ssh_key.private_key_pem
   sensitive = true
 }
+ 
