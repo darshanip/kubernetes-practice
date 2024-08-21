@@ -9,3 +9,4 @@
 .terraform.tfstate.lock.info
 
 .terraform.lock.hcl
+id_rsa_kubespray
